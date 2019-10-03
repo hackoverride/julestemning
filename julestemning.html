@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="nb">
+    <head>
+        <title>
+            Julestemning
+        </title>
+        <style>
+            body {width: 100%; margin: 0; height: 100%;}
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <script>
+            let canvas = document.getElementById('canvas');
+            let ctx = canvas.getContext('2d');
+            const HEIGHT = window.innerHeight-6;
+            const WIDTH = window.innerWidth-6;
+            canvas.height = HEIGHT;
+            canvas.width = WIDTH;
+            ctx.fillStyle = "black";
+            ctx.fillRect(0,0,WIDTH,HEIGHT);
+            var antall = 30;
+            let snowFlakes = [];
+            
+            for (let i = 0; i < antall; i++){
+                snowFlakes.push({
+                    x: Math.random()*WIDTH,
+                    y: Math.random()*HEIGHT,
+                    r: Math.random()*4+2,
+                    d: Math.random()*antall
+                })
+            }
+            
+            function update(){
+                ctx.clearRect(0,0,WIDTH,HEIGHT);
+                let grader = ctx.createLinearGradient(0, 0, WIDTH, HEIGHT);
+                grader.addColorStop(0, 'green');
+                grader.addColorStop(.5, 'red');
+                grader.addColorStop(1, 'green');
+                ctx.fillStyle = grader;
+                ctx.fillRect(0,0,WIDTH,HEIGHT);
+                ctx.fillStyle = "black";
+                ctx.fillRect(0,HEIGHT-100,WIDTH,100);
+                ctx.fillRect(WIDTH/2-20,HEIGHT-200,40,100);
+                ctx.beginPath();
+                ctx.moveTo((WIDTH/2)-120,HEIGHT-200);
+                ctx.lineTo((WIDTH/2)+120,HEIGHT-200);
+                ctx.lineTo(WIDTH/2,HEIGHT/2);
+                ctx.fill();
+                snower();
+            }
+            
+            function snower(){
+                ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+                ctx.beginPath();
+                for(let i = 0; i < antall; i++){
+                    let tempP = snowFlakes[i];
+                    ctx.moveTo(tempP.x, tempP.y);
+                    ctx.arc(tempP.x, tempP.y, tempP.r, 0, Math.PI*2, true);
+                }
+                ctx.fill();
+                animation();
+            }
+            
+            let angel = 0;
+            function animation(){
+                angel += 001;
+                for(let i = 0; i < antall; i++){
+                    let s = snowFlakes[i];
+                    s.y += 0.05;
+                    s.x += 0;
+                    
+                    if (s.x > WIDTH+5 || s.x < -5 || s.y > HEIGHT-100){
+                        snowFlakes[i] = {
+                            x: Math.random()*WIDTH,
+                            y: -10,
+                            r: s.r,
+                            d: s.d
+                        }
+                    }
+                }
+                setInterval(update, 35);
+            }
+            update();
+            
+        </script>
+    </body>
+</html>

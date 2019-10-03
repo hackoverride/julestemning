@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="nb">
+    <meta author="Michael Lund">
+    <meta charset="UTF-9">
     <head>
         <title>
             Julestemning
@@ -63,9 +65,7 @@
                 animation();
             }
             
-            let angel = 0;
             function animation(){
-                angel += 001;
                 for(let i = 0; i < antall; i++){
                     let s = snowFlakes[i];
                     s.y += 0.05;
@@ -82,8 +82,6 @@
                 }
                 setInterval(update, 35);
             }
-            update();
-            
         </script>
     </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="nb">
-    <meta author="Michael Lund">
+    <meta name="author" content="Michael Lund">
     <meta charset="UTF-8">
     <head>
         <title>
@@ -34,7 +34,7 @@
                 })
             }
             
-            function update(){
+            function update(){ //noe gjør at dette lagger... kanskje RPGA elementet eller om jeg finner en løsning på å kun animere snøfuggene?
                 ctx.clearRect(0,0,WIDTH,HEIGHT);
                 let grader = ctx.createLinearGradient(0, 0, WIDTH, HEIGHT);
                 grader.addColorStop(0, 'green');
@@ -72,7 +72,7 @@
                     s.y += 0.05;
                     s.x += 0;
                     
-                    if (s.x > WIDTH+5 || s.x < -5 || s.y > HEIGHT-100){
+                    if (s.x > WIDTH+5 || s.x < -5 || s.y > HEIGHT-100){ //bakken er satt til 100px over slutten av skjermen.
                         snowFlakes[i] = {
                             x: Math.random()*WIDTH,
                             y: -10,
